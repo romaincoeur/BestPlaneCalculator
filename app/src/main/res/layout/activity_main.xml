@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fr.wildcodeschool.bestplanecalculator.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/P1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Passenger1"
+                android:text="Passenger 1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:ems="8"
+                android:layout_toEndOf="@+id/Passenger1"
+                android:layout_marginTop="11dp"
+                android:id="@+id/editText2" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Weight"
+                android:ems="8"
+                android:layout_below="@+id/editText2"
+                android:layout_toEndOf="@+id/Passenger1"
+                android:layout_marginTop="13dp"
+                android:id="@+id/editText4" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/P2"
+            android:layout_below="@id/P1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Passenger2"
+                android:text="Passenger 2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:ems="8"
+                android:layout_marginTop="11dp"
+                android:layout_toEndOf="@+id/Passenger2"
+                android:id="@+id/editText" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Weight"
+                android:layout_below="@+id/Passenger2"
+                android:layout_toEndOf="@+id/Passenger2"
+                android:ems="8"
+                android:id="@+id/editText3"
+                android:layout_marginTop="35dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/P3"
+            android:layout_below="@+id/P2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Passenger3"
+                android:text="Passenger 3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:layout_toEndOf="@+id/Passenger3"
+                android:ems="8"
+                android:layout_marginTop="28dp"
+                android:id="@+id/editText5" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Weight"
+                android:ems="8"
+                android:layout_below="@+id/editText5"
+                android:layout_alignEnd="@+id/editText5"
+                android:layout_marginTop="14dp"
+                android:id="@+id/editText6" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/P4"
+            android:layout_below="@+id/P3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Passenger4"
+                android:text="Passenger 4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                android:layout_toEndOf="@+id/Passenger4"
+                android:ems="8"
+                android:id="@+id/editText7"
+                android:layout_below="@+id/Passenger4" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Weight"
+                android:ems="8"
+                android:layout_below="@+id/editText7"
+                android:layout_alignStart="@+id/editText7"
+                android:layout_marginTop="24dp"
+                android:id="@+id/editText8" />
+
+        </RelativeLayout>
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/submit_btn"
+            android:hint="Luggage Weight"
+            android:layout_below="@+id/P4"
+            android:id="@+id/Luggage"/>
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_below="@+id/Luggage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Result"
+
+            />
+    </RelativeLayout>
+
+</ScrollView>
