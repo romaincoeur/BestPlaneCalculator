@@ -19,8 +19,11 @@ public class PlaneModel {
     private float densityFuel;
     private float leverMin;
     private float leverMax;
+    private PassengerModel passenger1, passenger2, passenger3, passenger4;
 
-    public PlaneModel(float leverMax, String name, float weightMin, float weightMax, float maxFuel, float luggage, float leverArmEmpty, float leverArmForward, float leverArmBackward, float leverArmLuggage, float leverArmFuel, float densityFuel, float leverMin) {
+
+
+    public PlaneModel(float leverMin, float leverMax, String name, float weightMin, float weightMax, float maxFuel, float leverArmEmpty, float leverArmForward, float leverArmBackward, float leverArmLuggage, float leverArmFuel, float densityFuel, PassengerModel passenger1, PassengerModel passenger2, PassengerModel passenger3, PassengerModel passenger4, float luggage ) {
         this.leverMax = leverMax;
         this.name = name;
         this.weightMin = weightMin;
@@ -34,6 +37,14 @@ public class PlaneModel {
         this.leverArmFuel = leverArmFuel;
         this.densityFuel = densityFuel;
         this.leverMin = leverMin;
+        this.passenger1 = passenger1;
+        this.passenger2 = passenger2;
+        this.passenger3 = passenger3;
+        this.passenger4 = passenger4;
+    }
+    public void optimizationOfTheYear(){
+        float massFuel = this.weightMax - (this.passenger1.getWeight() + this.passenger2.getWeight() + this.passenger3.getWeight() + this.passenger4.getWeight()
+        + this.luggage + this.weightMin);
     }
 
     public float getLeverMax() {
@@ -140,4 +151,19 @@ public class PlaneModel {
         this.leverMin = leverMin;
     }
 
+    public PassengerModel getPassenger1() {
+        return passenger1;
+    }
+
+    public PassengerModel getPassenger2() {
+        return passenger2;
+    }
+
+    public PassengerModel getPassenger3() {
+        return passenger3;
+    }
+
+    public PassengerModel getPassenger4() {
+        return passenger4;
+    }
 }

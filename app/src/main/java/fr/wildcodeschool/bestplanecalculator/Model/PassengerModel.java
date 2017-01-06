@@ -8,6 +8,7 @@ public class PassengerModel {
 
     private float weight;
     private String name;
+    private String spot;
 
     public  PassengerModel (){}
 
@@ -17,7 +18,7 @@ public class PassengerModel {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -25,11 +26,18 @@ public class PassengerModel {
     }
 
     public float getWeight() {
-        return weight;
+        return this.weight;
     }
 
     public void setWeight(float weight) {
         this.weight = weight;
     }
 
+    public String getSpot(){
+        return this.spot;
+    }
+
+    public void setSpot(String spot) {
+        this.spot = spot;
+    }
 }
