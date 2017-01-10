@@ -1,5 +1,7 @@
 package fr.wildcodeschool.bestplanecalculator.Model;
 
+import android.widget.Switch;
+
 /**
  * Created by romain on 03/01/17.
  */
@@ -23,7 +25,7 @@ public class PlaneModel {
 
 
 
-    public PlaneModel(float leverMin, float leverMax, String name, float weightMin, float weightMax, float maxFuel, float leverArmEmpty, float leverArmForward, float leverArmBackward, float leverArmLuggage, float leverArmFuel, float densityFuel, PassengerModel passenger1, PassengerModel passenger2, PassengerModel passenger3, PassengerModel passenger4, float luggage ) {
+    public PlaneModel(float leverMin, float leverMax, String name, float weightMin, float weightMax, float maxFuel, float leverArmEmpty, float leverArmForward, float leverArmBackward, float leverArmLuggage, float leverArmFuel, float densityFuel) {
         this.leverMax = leverMax;
         this.name = name;
         this.weightMin = weightMin;
@@ -37,54 +39,69 @@ public class PlaneModel {
         this.leverArmFuel = leverArmFuel;
         this.densityFuel = densityFuel;
         this.leverMin = leverMin;
-        this.passenger1 = passenger1;
-        this.passenger2 = passenger2;
-        this.passenger3 = passenger3;
-        this.passenger4 = passenger4;
     }
-    public void optimizationOfTheYear(){
+    public String optimizationOfTheYear(){
+        float [][] matrice = new float[6][2];
+        matrice[0]=fuelCenter(this.passenger1.getWeight()+this.passenger2.getWeight(), this.passenger3.getWeight()+this.passenger4.getWeight());
+        matrice[1]=fuelCenter(this.passenger1.getWeight()+this.passenger3.getWeight(), this.passenger2.getWeight()+this.passenger4.getWeight());
+        matrice[2]=fuelCenter(this.passenger1.getWeight()+this.passenger4.getWeight(), this.passenger2.getWeight()+this.passenger3.getWeight());
+        matrice[3]=fuelCenter(this.passenger2.getWeight()+this.passenger4.getWeight(), this.passenger1.getWeight()+this.passenger3.getWeight());
+        matrice[4]=fuelCenter(this.passenger2.getWeight()+this.passenger3.getWeight(), this.passenger1.getWeight()+this.passenger4.getWeight());
+        matrice[5]=fuelCenter(this.passenger3.getWeight()+this.passenger4.getWeight(), this.passenger1.getWeight()+this.passenger2.getWeight());
+
+        int bestindex = 0;
+
+        for (int i=1; i<matrice.length;i++){
+
+             if (matrice[i][0]> matrice[bestindex][0]){
+                 bestindex = i;
+             }else if (matrice[i][0] == matrice[bestindex][0]){
+                 if (matrice[i][1] < matrice[bestindex][1]){
+                     bestindex = i;
+                 }
+
+             }
+
+        }
+        String result = "";
+        switch(bestindex){
+            case 0:
+                result = passenger1.getName() + " et " + passenger2.getName() + " à l'avant";
+            break;
+
+            case 1:
+                result = passenger1.getName() + " et " + passenger3.getName() + " à l'avant";
+            break;
+
+            case 2:
+                result = passenger1.getName() + " et " + passenger4.getName() + " à l'avant";
+            break;
+
+            case 3:
+                result = passenger2.getName() + " et " + passenger3.getName() + " à l'avant";
+            break;
+
+            case 4:
+                result = passenger2.getName() + " et " + passenger4.getName() + " à l'avant";
+            break;
+
+            case 5:
+                result = passenger3.getName() + " et " + passenger4.getName() + " à l'avant";
+            break;
+        }
+        return result + "\nemporte " + matrice[bestindex][0] + "L";
+    }
+    private float[] fuelCenter(float frontWeight, float backWeight){
         float massFuel = this.weightMax - (this.passenger1.getWeight() + this.passenger2.getWeight() + this.passenger3.getWeight() + this.passenger4.getWeight()
-        + this.luggage + this.weightMin);
-    }
+                + this.luggage + this.weightMin);
 
-    public float getLeverMax() {
-        return leverMax;
-    }
+        if (massFuel > maxFuel * densityFuel) massFuel = maxFuel * densityFuel;
+        float moment = frontWeight * leverArmForward + backWeight * leverArmBackward + luggage * leverArmLuggage + massFuel * leverArmFuel + weightMin * leverArmEmpty ;
+        float massTotal = massFuel + luggage + frontWeight + backWeight + weightMin;
+        float centrage = moment / massTotal;
+        float qteFuel = massFuel / densityFuel;
 
-    public void setLeverMax(float leverMax) {
-        this.leverMax = leverMax;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public float getWeightMin() {
-        return weightMin;
-    }
-
-    public void setWeightMin(float weightMin) {
-        this.weightMin = weightMin;
-    }
-
-    public float getWeightMax() {
-        return weightMax;
-    }
-
-    public void setWeightMax(float weightMax) {
-        this.weightMax = weightMax;
-    }
-
-    public float getMaxFuel() {
-        return maxFuel;
-    }
-
-    public void setMaxFuel(float maxFuel) {
-        this.maxFuel = maxFuel;
+        return new float[] {qteFuel, centrage};
     }
 
     public float getLuggage() {
@@ -95,75 +112,35 @@ public class PlaneModel {
         this.luggage = luggage;
     }
 
-    public float getLeverArmEmpty() {
-        return leverArmEmpty;
-    }
-
-    public void setLeverArmEmpty(float leverArmEmpty) {
-        this.leverArmEmpty = leverArmEmpty;
-    }
-
-    public float getLeverArmForward() {
-        return leverArmForward;
-    }
-
-    public void setLeverArmForward(float leverArmForward) {
-        this.leverArmForward = leverArmForward;
-    }
-
-    public float getLeverArmBackward() {
-        return leverArmBackward;
-    }
-
-    public void setLeverArmBackward(float leverArmBackward) {
-        this.leverArmBackward = leverArmBackward;
-    }
-
-    public float getLeverArmLuggage() {
-        return leverArmLuggage;
-    }
-
-    public void setLeverArmLuggage(float leverArmLuggage) {
-        this.leverArmLuggage = leverArmLuggage;
-    }
-
-    public float getLeverArmFuel() {
-        return leverArmFuel;
-    }
-
-    public void setLeverArmFuel(float leverArmFuel) {
-        this.leverArmFuel = leverArmFuel;
-    }
-
-    public float getDensityFuel() {
-        return densityFuel;
-    }
-
-    public void setDensityFuel(float densityFuel) {
-        this.densityFuel = densityFuel;
-    }
-
-    public float getLeverMin() {
-        return leverMin;
-    }
-
-    public void setLeverMin(float leverMin) {
-        this.leverMin = leverMin;
-    }
-
     public PassengerModel getPassenger1() {
         return passenger1;
+    }
+
+    public void setPassenger1(PassengerModel passenger1) {
+        this.passenger1 = passenger1;
     }
 
     public PassengerModel getPassenger2() {
         return passenger2;
     }
 
+    public void setPassenger2(PassengerModel passenger2) {
+        this.passenger2 = passenger2;
+    }
+
     public PassengerModel getPassenger3() {
         return passenger3;
     }
 
+    public void setPassenger3(PassengerModel passenger3) {
+        this.passenger3 = passenger3;
+    }
+
     public PassengerModel getPassenger4() {
         return passenger4;
+    }
+
+    public void setPassenger4(PassengerModel passenger4) {
+        this.passenger4 = passenger4;
     }
 }

@@ -136,6 +136,11 @@
             android:text="Result"
 
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textResult"
+            android:text=" "/>
     </RelativeLayout>
 
 </ScrollView>
